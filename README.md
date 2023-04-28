@@ -8,7 +8,9 @@ What we plan to add in our web app are the following (that will impact the threa
 - Email and password signing up and authentication using OAuth
 
 ## 2. Authentication and authorization (webapp)
-The only way users can connect to the web app is via Metamask. I've implemented Moralis' SDK that allows me to use their method for signature authorization via Metamask for logging users in which also stores their session token to MongoDB upon a successful signature. Currently, there are **no known** risks of unauthorized usage via email or password.
+The only way users can connect to the web app is via Metamask. I've used Moralis' SDK to help me simplify this process but without mitigating security. When a user logs in with Metamask, a signature message from the backend is generated, and when the user accepts the message, it is then encrypted and reverted back as a unique session token which is used to identify and authenticate the user in our web app. Session tokens expire in 3 days. 
+
+As we haven't finished building the email-password signup method, there are currently no known risks of authentication/authorization breaches from our side for the web app.
 
 ## 3. Authentication and authorization (backend, DB, blockchain)
 All CRUD operations that instantiates MongoDB via our backend have middlewares to ensure that only authorized users are allowed to access these endpoints. For instance: we are implementing soft staking for our NFTs, which means users won't have to spend gas and interact with our contract to stake (known as hard staking). However, this means that we need to make sure users can only stake their own NFTs, that they can't add their NFTs multiple times on the same staking pool multiple times to get more rewards or add someone else's NFTs on their behalf. 
