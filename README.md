@@ -24,7 +24,7 @@ We are using Vercel as our frontend platform to deploy our web app, which automa
 Vercel also includes DDoS protection, firewall rules and access controls.
 ### b. Security Headers
 The following can be found in the (Next config file)[https://github.com/NotBoringCompany/nbc-webapp/blob/main/next.config.js] of the web app repo.
-```json
+```
 async headers() {
 		return [
 			{
@@ -38,7 +38,7 @@ async headers() {
 							styleSrc: ["'self'", "'unsafe-inline'"],
 							imgSrc: [
 								"'self'",
-                "realmhunter-kos.fra1.cdn.digitaloceanspaces.com",
+                						"realmhunter-kos.fra1.cdn.digitaloceanspaces.com",
 							],
 							baseUri: "self",
 						},
