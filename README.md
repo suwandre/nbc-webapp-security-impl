@@ -19,7 +19,12 @@ Checks have been made to make sure that these users are themselves (by checking 
 
 As smart contracts are used as the main source of truth for our current operations (staking), all authorization methods have been properly implemented in the smart contracts via modifiers and reverts to ensure that users cannot, for example, withdraw more tokens than allowed from the admin wallet, for instance when earning the token rewards.
 
-## 4. Web App Security
+## 4. NoSQL injection prevention
+Using the MongoDB driver (Golang), we've applied some best practices from some sources such as using parameterized queries to ensure that user input is properly escaped and validated before being used in a query. Across the backend, I've implemented the usage of `bson.M{}` and `bson.D{}` types throughout all CRUD operations. 
+
+More implementations such as using `bsoncore.ValidateString` to validate string input will be implemented in the near future.
+
+## 5. Web App Security
 ### a. Vercel as a deployment platform
 We are using Vercel as our frontend platform to deploy our web app, which automatically provisions and configures an SSL/TLS certificate from Let's Encrypt, a certificate authority that provides encryption for all traffic to and from our web app. This helps protect against eavesdropping, tampering and other sorts of security threats when transmitting data. 
 
@@ -69,20 +74,20 @@ This includes:
 
 - Referrer policy control, which we set to `"strict-origin-when-cross-origin"`. When using this policy, the full URL of the referring page will only be sent in the `Referrer` header when the user navigates from one page on our web app to another page on our web app (i.e same origin requests). When a user navigates from a page on our web app to a page on another website (cross origin), only the origin of the referring page will be included in the `Referrer` header, which protects the user's privacy by preventing other websites from seeing the full URL of the referring page. This also prevents certain types of attacks such as cross-site request forgery (CSRF) attacks, which can be used to impersonate the user and perform actions on their behalf.
 
-## 5. DDoS protection
+## 6. DDoS protection
 Although we can't 100% prevent DDoS attacks and more implementations can be added, we've implemented the following for now:
 - Rate limiting backend via Redis, which limits the amount of traffic per user.
 - 24/7 monitoring, traffic filtering, Anycast DNS and automatic scaling, which are all provided by Vercel.
 - Reducing request payload from the frontend to the backend, which can sometimes log up memory and CPU usage of the backend provider.
 - CDN (content delivery network) usage for our media (in DigitalOcean Spaces), which caches the content we've uploaded and reduces bandwidth by up to 80%.
 
-## 6. Password management
+## 7. Password management
 As we are currently building our email-password signup method, we are planning to use Mongo Passport and bcrypt to auto-generate a salt and encrypt each user's passwords when storing it in our database.
 
 For password resets, we will use a secure token when being embedded in the password URL. This needs to be single use and randomly generated using `crypto.js` or similar crypto libraries that can generate a strong and cryptographically safe token and we will be sure to let it expire immediately after an appropriate period.
 
-## 7. Captcha usage
+## 8. Captcha usage
 Although this hasn't been implemented yet, we are planning to add Google's re-Captcha tool to our site to prevent spam and/or abuse (which can also help mitigate DDoS attacks).
 
-## 8. Testing and functionality
+## 9. Testing and functionality
 We have created (and will continue to create) tests and sample instances (such as sample functions, sample collections in the database etc.) to ensure that each function that is required functions properly and no leaks, error potentials and unnnecessary error panics occur. Although not implemented yet, we are going to use Github Actions as a CI/CD tool to ensure that each push into the repository is clean of simple and known issues.
