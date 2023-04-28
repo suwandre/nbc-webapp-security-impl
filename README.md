@@ -1,4 +1,7 @@
 # NBC Webapp Security Implementation
+Frontend repo: https://github.com/NotBoringCompany/nbc-webapp
+Backend repo: https://github.com/NotBoringCompany/nbc-webapp-api
+
 ## 1. Threat Model
 Below is a threat model for our web app:
 ![image](https://user-images.githubusercontent.com/60882255/235114351-64b90af6-5c0c-49b4-82f0-7026b619e224.png)
