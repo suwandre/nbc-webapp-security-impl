@@ -29,7 +29,7 @@ More implementations such as using `bsoncore.ValidateString` to validate string 
 
 ## 5. Web App Security
 ### a. Vercel as a deployment platform
-We are using Vercel as our frontend platform to deploy our web app, which automatically provisions and configures an SSL/TLS certificate from Let's Encrypt, a certificate authority that provides encryption for all traffic to and from our web app. This helps protect against eavesdropping, tampering and other sorts of security threats when transmitting data. 
+We are using Vercel as our frontend platform to deploy our web app, which automatically provisions and configures a TLS certificate from Let's Encrypt, a certificate authority that provides encryption for all traffic to and from our web app. This helps protect against eavesdropping, tampering and other sorts of security threats when transmitting data. 
 
 Vercel also includes DDoS protection, firewall rules and access controls.
 ### b. Security Headers
